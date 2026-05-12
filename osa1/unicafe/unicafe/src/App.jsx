@@ -8,14 +8,16 @@ const Button = (props) => {
     </button>
   )
 }
-//statisticsLine-komponentti, joka saa propsina tekstin ja arvon, ja näyttää ne muodossa "teksti arvo"
+// statisticline palauttaa html-taulukon rivin tr ja kaksi solua td
 const StatisticLine = (props) => {
   return (
-    <p>
-      {props.text} {props.value}
-    </p>
+    <tr>
+      <td>{props.text}</td>
+      <td>{props.value}</td>
+    </tr>
   )
 }
+
 //statistics-komponentti, joka saa propsina good, neutral ja bad, ja laskee niistä tilastot
 const Statistics = (props) => {
   const all = props.good + props.neutral + props.bad
@@ -33,15 +35,20 @@ const Statistics = (props) => {
   const average = (props.good - props.bad) / all
   const positive = (props.good / all) * 100
 
+//komponentit table ja tbody tägien sisään, jotta statisticline-komponentti renderöityy taulukkomuodossa
   return (
     <div>
       <h1>statistics</h1>
-      <StatisticLine text="good" value={props.good} />
-      <StatisticLine text="neutral" value={props.neutral} />
-      <StatisticLine text="bad" value={props.bad} />
-      <StatisticLine text="all" value={all} />
-      <StatisticLine text="average" value={average} />
-      <StatisticLine text="positive" value={positive + " %"} />
+      <table>
+        <tbody>
+          <StatisticLine text="good" value={props.good} />
+          <StatisticLine text="neutral" value={props.neutral} />
+          <StatisticLine text="bad" value={props.bad} />
+          <StatisticLine text="all" value={all} />
+          <StatisticLine text="average" value={average} />
+          <StatisticLine text="positive" value={positive + " %"} />
+        </tbody>
+      </table>
     </div>
   )
 }
