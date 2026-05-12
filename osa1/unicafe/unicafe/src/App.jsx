@@ -3,6 +3,17 @@ import { useState } from 'react'
 //uusi komponentti statistics, johon siirretään laskutoimitukset
 const Statistics = (props) => {
   const all = props.good + props.neutral + props.bad
+
+//jos palautteita ei ole annettu palautetaan tämä teksti
+  if (all === 0) {
+    return (
+      <div>
+        <h1>statistics</h1>
+        <p>No feedback given</p>
+      </div>
+    )
+  }
+// kun palautteita on annettu, lasketaan keskiarvo ja positiivisten osuus
   const average = (props.good - props.bad) / all
   const positive = (props.good / all) * 100
 
