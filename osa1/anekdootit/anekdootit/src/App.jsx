@@ -13,17 +13,35 @@ const App = () => {
 
   const [selected, setSelected] = useState(0)
   //funktio arpoo satunnaisen indeksin ja päivittää tilan
+
+  //nollilla täytetty taulukko jonka pituus on sama kuin anekdoottien määrä
+  const [votes, setVotes] = useState(new Array(anecdotes.length).fill(0))
+
   const handleNextAnecdote = () => {
     const randomIndex = Math.floor(Math.random() * anecdotes.length)
     setSelected(randomIndex)
   }
 
+  //funktio äänestämiselle
+  const handleVote = () => {
+    const copy = [...votes]
+    copy[selected] += 1
+    setVotes(copy)
+  }
+
   return (
     <div>
       <p>{anecdotes[selected]}</p>
+      {/*valitun anekdootin äänimäärä*/}
+      <p>has {votes[selected]} votes</p>
+
+      {/*Äänestysnappi ja seuraava anekdootti nappi*/}
+      <button onClick={handleVote}>
+       vote
+      </button>
       <button onClick={handleNextAnecdote}>
-        Next Anecdote
-        </button>
+        next anecdote
+      </button>
     </div>
   )
 }
